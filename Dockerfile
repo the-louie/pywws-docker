@@ -1,7 +1,8 @@
 FROM alpine:latest
-LABEL maintainer "Andrew <me@duck.me.uk>"
+LABEL maintainer "Louie <docker@louie.se>"
 
 RUN apk add --no-cache python3 \
+    py3-pip \
     libusb \
     py3-cffi \
     openssl \
@@ -22,6 +23,9 @@ RUN pip3 install \
     oauth2 \
     tzlocal \
     pycrypto \
+    paho-mqtt \
+    requests \
     pywws
 
-VOLUME ["/var/data"]
+VOLUME ["/var/weather"]
+ENTRYPOINT ["pywws-livelog", "/var/weather/data"]
